@@ -24,6 +24,14 @@ This interface provides a complete set of tools to interact with your WiFi Duck 
 | **Custom Modals** | Fast and non-blocking custom dialog popups for alerts, confirmations, and prompts. |
 | **Settings Management** | Easily change your WiFi SSID, password, and channel directly from the browser without flashing the device. |
 
+## Project Overview & Analysis
+
+Based on the internal architecture of this repository, the WiFi Duck relies on a dual-microcontroller setup:
+1. **ESP8266** (in the `esp_duck` directory): Handles the web server, Wi-Fi access point, and payload storage (SPIFFS).
+2. **ATmega32u4** (in the `atmega_duck` directory): Acts as the USB HID (Human Interface Device) keyboard to execute the payloads sent by the ESP8266 via serial/I2C communication.
+
+The project currently sits at **Version 1.2.0** and uses `wifi.duck` as its local hostname resolution for easy access.
+
 ## Quick Start Guide
 
 ### 1. Connecting to the Device
