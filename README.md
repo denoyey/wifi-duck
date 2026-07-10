@@ -33,6 +33,19 @@ Proyek ini menggunakan dua modul mikrokontroler yang saling terhubung:
 | ![Wemos D1 Mini](web/assets/img/alat/Wemos-D1-Mini.webp) | ![Arduino Pro Micro](web/assets/img/alat/Arduino-Pro-Micro.webp) |
 | Menangani WiFi & Web Server | Menangani USB Keyboard (HID) |
 
+### Struktur Perangkaian (*Wiring*)
+
+Berikut adalah foto implementasi nyata WiFi Duck pada *breadboard*. Kedua modul dihubungkan melalui kabel jumper untuk komunikasi serial, ditambah satu modul **Neopixel LED** sebagai indikator status.
+
+![Struktur Implementasi WiFi Duck](web/assets/img/alat/struktur-implementasi.jpg)
+
+| Komponen | Fungsi |
+|---|---|
+| **Wemos D1 Mini** (kiri) | WiFi Access Point — memancarkan sinyal WiFi dan menjalankan Web Server. |
+| **Arduino Pro Micro** (kanan) | USB Keyboard (HID) — dicolokkan ke komputer target untuk mengeksekusi *payload*. |
+| **Neopixel LED** (tengah) | Status LED — menampilkan warna berbeda sesuai kondisi alat (siap/menjalankan *script*/error). |
+| **Breadboard** | Media perangkaian tanpa solder untuk menghubungkan seluruh komponen. |
+
 ## Analisis & Ringkasan Proyek
 
 Berdasarkan arsitektur internal repositori ini, WiFi Duck bekerja menggunakan sistem dua mikrokontroler (*dual-MCU*):
