@@ -1,109 +1,204 @@
-# Antarmuka Web WiFi Duck
+<p align="center">
+  <img src="https://img.icons8.com/emoji/96/duck.png" alt="WiFi Duck Logo" width="80">
+</p>
 
-Antarmuka web modern dan responsif untuk proyek WiFi Duck, dirancang agar Anda dapat mengelola dan menjalankan *script payload* (Ducky Script) dengan mudah langsung dari *browser* Anda.
+<h1 align="center">🦆 WiFi Duck</h1>
 
-## Pratinjau
+<p align="center">
+  <strong>Keystroke Injection Attack Platform — Dikendalikan via WiFi</strong>
+</p>
 
-### Tampilan Desktop
-![Desktop Preview](web/assets/img/preview/desktop-1.png)
+<p align="center">
+  <img src="https://img.shields.io/badge/versi-1.2.0-blue?style=for-the-badge" alt="Version">
+  <img src="https://img.shields.io/badge/platform-ESP8266%20%2B%20ATmega32u4-orange?style=for-the-badge" alt="Platform">
+  <img src="https://img.shields.io/badge/bahasa-Indonesian-green?style=for-the-badge" alt="Language">
+  <img src="https://img.shields.io/badge/lisensi-MIT-purple?style=for-the-badge" alt="License">
+</p>
 
-### Tampilan Mobile
-![Mobile Preview](web/assets/img/preview/mobile-1.png)
+<p align="center">
+  <em>Antarmuka web modern dan responsif untuk proyek WiFi Duck, dirancang agar Anda dapat mengelola dan menjalankan script payload (Ducky Script) dengan mudah langsung dari browser Anda.</em>
+</p>
 
-## Fitur Utama
+---
+
+## 📸 Pratinjau
+
+<table>
+  <tr>
+    <th>🖥️ Tampilan Desktop</th>
+    <th>📱 Tampilan Mobile</th>
+  </tr>
+  <tr>
+    <td><img src="web/assets/img/preview/desktop-1.png" alt="Desktop Preview" width="500"></td>
+    <td><img src="web/assets/img/preview/mobile-1.png" alt="Mobile Preview" width="200"></td>
+  </tr>
+</table>
+
+---
+
+## ✨ Fitur Utama
 
 Antarmuka ini menyediakan fitur lengkap untuk mengendalikan perangkat WiFi Duck Anda.
 
 | Fitur | Deskripsi |
-|---|---|
-| **Script Editor** | Editor kode bawaan untuk membuat, mengedit, dan menyimpan Ducky Script langsung ke dalam memori perangkat. |
-| **Live Terminal** | Terminal interaktif bergaya *hacker* untuk menjalankan perintah secara langsung, melihat log keluaran, dan memantau status alat. |
-| **Responsive UI** | Tampilan antarmuka yang sangat fleksibel, memastikan tata letak tetap rapi dan nyaman digunakan baik di layar komputer maupun HP. |
-| **Theme Toggle** | Tombol praktis untuk berganti antara mode Terang (Light) dan Gelap (Dark) sesuai selera mata Anda. |
-| **Live Status** | Indikator koneksi *real-time* dan pemantau sisa memori penyimpanan langsung dari halaman utama. |
-| **Custom Modals** | Dialog *popup* khusus yang super cepat, ringan, elegan, dan tidak memblokir pergerakan *browser*. |
-| **Settings Management** | Ubah nama WiFi (SSID), *password*, dan saluran (Channel) langsung dari *browser* tanpa perlu melakukan *flash* ulang alatnya. |
+|:---|:---|
+| 📝 **Script Editor** | Editor kode bawaan dengan *Syntax Highlighting* untuk membuat, mengedit, dan menyimpan Ducky Script langsung ke dalam memori perangkat. |
+| 💻 **Live Terminal** | Terminal interaktif bergaya *hacker* untuk menjalankan perintah secara langsung dan memantau status alat. |
+| 📱 **Responsive UI** | Tampilan antarmuka yang sangat fleksibel, nyaman digunakan baik di layar komputer maupun HP. |
+| 🌗 **Theme Toggle** | Tombol praktis untuk berganti antara mode Terang dan Gelap sesuai selera mata Anda. |
+| 📡 **Live Status** | Indikator koneksi *real-time* dan pemantau sisa memori penyimpanan langsung dari halaman utama. |
+| 🪟 **Custom Modals** | Dialog *popup* khusus yang super cepat, ringan, dan elegan. |
+| ⚙️ **Settings Management** | Ubah SSID, *password*, dan channel langsung dari *browser* tanpa perlu *flash* ulang. |
+| 🥷 **Stealth Jitter** | Mode pengetikan siluman dengan jeda acak (15-45ms) untuk mengelabui deteksi Antivirus. |
 
-## Hardware yang Digunakan
+---
+
+## 🔧 Hardware yang Digunakan
 
 Proyek ini menggunakan dua modul mikrokontroler yang saling terhubung:
 
-| Wemos D1 Mini | Arduino Pro Micro |
-|:---:|:---:|
-| ![Wemos D1 Mini](web/assets/img/alat/Wemos-D1-Mini.webp) | ![Arduino Pro Micro](web/assets/img/alat/Arduino-Pro-Micro.webp) |
-| Menangani WiFi & Web Server | Menangani USB Keyboard (HID) |
+<table>
+  <tr>
+    <th align="center">📶 Wemos D1 Mini</th>
+    <th align="center">⌨️ Arduino Pro Micro</th>
+  </tr>
+  <tr>
+    <td align="center"><img src="web/assets/img/alat/Wemos-D1-Mini.webp" alt="Wemos D1 Mini" width="250"></td>
+    <td align="center"><img src="web/assets/img/alat/Arduino-Pro-Micro.webp" alt="Arduino Pro Micro" width="250"></td>
+  </tr>
+  <tr>
+    <td align="center"><em>Menangani WiFi & Web Server</em></td>
+    <td align="center"><em>Menangani USB Keyboard (HID)</em></td>
+  </tr>
+</table>
 
-### Struktur Perangkaian (*Wiring*)
+### 🔌 Struktur Perangkaian (*Wiring*)
 
 Berikut adalah foto implementasi nyata WiFi Duck pada *breadboard*. Kedua modul dihubungkan melalui kabel jumper untuk komunikasi serial, ditambah satu modul **Neopixel LED** sebagai indikator status.
 
-![Struktur Implementasi WiFi Duck](web/assets/img/alat/struktur-implementasi.jpg)
+<p align="center">
+  <img src="web/assets/img/alat/struktur-implementasi.jpg" alt="Struktur Implementasi WiFi Duck" width="600">
+</p>
 
 | Komponen | Fungsi |
-|---|---|
-| **Wemos D1 Mini** (kiri) | WiFi Access Point — memancarkan sinyal WiFi dan menjalankan Web Server. |
-| **Arduino Pro Micro** (kanan) | USB Keyboard (HID) — dicolokkan ke komputer target untuk mengeksekusi *payload*. |
-| **Neopixel LED** (tengah) | Status LED — menampilkan warna berbeda sesuai kondisi alat (siap/menjalankan *script*/error). |
-| **Breadboard** | Media perangkaian tanpa solder untuk menghubungkan seluruh komponen. |
+|:---|:---|
+| 📶 **Wemos D1 Mini** | WiFi Access Point — memancarkan sinyal WiFi dan menjalankan Web Server. |
+| ⌨️ **Arduino Pro Micro** | USB Keyboard (HID) — dicolokkan ke komputer target untuk mengeksekusi *payload*. |
+| 💡 **Neopixel LED** | Status LED — menampilkan warna berbeda sesuai kondisi alat. |
+| 🧩 **Breadboard** | Media perangkaian tanpa solder untuk menghubungkan seluruh komponen. |
 
-## Cara Kerja WiFi Duck
+---
 
-WiFi Duck bekerja dengan prinsip ***Keystroke Injection Attack*** — alat ini menyamar sebagai *keyboard* USB biasa di mata komputer target. Begitu dicolokkan, alat akan secara otomatis mengetikkan perintah-perintah berbahaya dengan kecepatan super tinggi, persis seperti ada orang tak terlihat yang sedang mengetik di komputer Anda.
+## 🦆 Cara Kerja WiFi Duck
+
+WiFi Duck bekerja dengan prinsip ***Keystroke Injection Attack*** — alat ini menyamar sebagai *keyboard* USB biasa di mata komputer target. Begitu dicolokkan, alat akan secara otomatis mengetikkan perintah-perintah dengan kecepatan super tinggi, persis seperti ada orang tak terlihat yang sedang mengetik di komputer Anda.
 
 <p align="center">
   <img src="web/assets/img/alat/Cara-Kerja-WifiDuck.jpg" alt="Cara Kerja WiFi Duck — Keystroke Injection Attack" width="700">
 </p>
 
 | Tahap | Proses |
-|:---:|---|
-| **1️⃣ USB Drive** | WiFi Duck dicolokkan ke port USB komputer target. Sistem operasi mengenalinya sebagai *keyboard* biasa. |
-| **2️⃣ Connection** | Alat mengirimkan rangkaian penekanan tombol otomatis, misalnya: `Win+R` → ketik `CMD` → `Enter` → ketik `SHUTDOWN`. |
-| **3️⃣ Computer** | Komputer target mengeksekusi semua perintah tersebut tanpa curiga, karena sumbernya dianggap berasal dari *keyboard* fisik yang sah. |
+|:---:|:---|
+| 1️⃣ **USB Drive** | WiFi Duck dicolokkan ke port USB komputer target. Sistem operasi mengenalinya sebagai *keyboard* biasa. |
+| 2️⃣ **Connection** | Alat mengirimkan rangkaian penekanan tombol otomatis, misalnya: `Win+R` → `CMD` → `Enter` → `SHUTDOWN`. |
+| 3️⃣ **Computer** | Komputer target mengeksekusi semua perintah tanpa curiga, karena sumbernya dianggap berasal dari *keyboard* fisik yang sah. |
 
 > 💡 **Yang membuat WiFi Duck istimewa:** Anda bisa mengontrol dan memodifikasi *script* serangan secara nirkabel (*wireless*) melalui antarmuka web dari HP Anda — tanpa perlu menyentuh komputer target lagi setelah alat dicolokkan!
 
-## Analisis & Ringkasan Proyek
+---
 
-Berdasarkan arsitektur internal repositori ini, WiFi Duck bekerja menggunakan sistem dua mikrokontroler (*dual-MCU*):
-1. **Wemos D1 Mini (ESP8266)** (berada di *folder* `esp_duck`): Bertugas menangani server web, memancarkan sinyal WiFi (Access Point), dan menyimpan file *script* (SPIFFS).
-2. **Arduino Pro Micro (ATmega32u4)** (berada di *folder* `atmega_duck`): Berperan sebagai *keyboard* USB (HID) yang bertugas mengeksekusi *script/payload* yang dikirimkan oleh Wemos D1 Mini melalui komunikasi serial/I2C.
+## 🏗️ Arsitektur Proyek
 
-Proyek ini sekarang berada di **Versi 1.2.0** dan secara bawaan menggunakan alamat `wifi.duck` agar mudah diakses di *browser*.
+```
+WiFi Duck bekerja menggunakan sistem dual-MCU (dua mikrokontroler):
 
-## Panduan Cepat
+┌──────────────────────┐        Serial/I2C        ┌──────────────────────┐
+│   Wemos D1 Mini      │ ◄───────────────────────► │  Arduino Pro Micro   │
+│   (ESP8266)          │                           │  (ATmega32u4)        │
+│                      │                           │                      │
+│  📂 esp_duck/        │                           │  📂 atmega_duck/     │
+│  • Web Server        │                           │  • USB HID Keyboard  │
+│  • WiFi AP           │                           │  • Ducky Parser      │
+│  • SPIFFS Storage    │                           │  • Keystroke Inject   │
+│  • Script Manager    │                           │  • Jitter Engine      │
+└──────────────────────┘                           └──────────────────────┘
+```
 
-### 1. Menghubungkan ke Perangkat
-Nyalakan WiFi Duck Anda. Alat ini akan memancarkan sinyal WiFi-nya sendiri. Hubungkan komputer atau HP Anda ke jaringan WiFi tersebut. Secara bawaan (default), nama WiFi-nya adalah `wifiduck` dengan kata sandi `wifiduck`.
+---
 
-### 2. Mengakses Antarmuka (Web UI)
-Buka *browser* web favorit Anda lalu ketikkan alamat `http://192.168.4.1` atau `wifi.duck`. Anda akan disambut oleh halaman *dashboard* utama tempat Anda bisa melihat memori perangkat dan daftar *script*.
+## 🚀 Panduan Cepat
 
-### 3. Mengelola Script
-- **Membuat**: Ketik nama file baru di kolom yang tersedia lalu klik **Create**.
-- **Mengedit**: Klik salah satu *script* yang sudah ada untuk memuat isinya ke dalam teks editor.
-- **Menjalankan**: Tekan tombol **Run** untuk langsung mengeksekusi *script* tersebut pada komputer korban.
-- **Menghapus**: Gunakan tombol **Delete** untuk membuang *script* yang tidak diperlukan lagi.
+### 1️⃣ Menghubungkan ke Perangkat
+Nyalakan WiFi Duck Anda. Alat ini akan memancarkan sinyal WiFi-nya sendiri. Hubungkan komputer atau HP Anda ke jaringan WiFi tersebut.
 
-### 4. Akses Terminal
-Buka halaman **Terminal** melalui menu navigasi di atas untuk masuk ke mode *command line* secara langsung. Ini memungkinkan Anda untuk berinteraksi dengan alat lebih jauh, seperti memformat penyimpanan (SPIFFS), mengecek variabel sistem, atau menjalankan perintah *ducky* baris demi baris secara manual.
+> **Default:** SSID = `wifiduck` · Password = `wifiduck`
 
-## Referensi Ducky Script
+### 2️⃣ Mengakses Antarmuka (Web UI)
+Buka *browser* lalu ketikkan alamat:
 
-Berikut adalah panduan cepat untuk beberapa perintah umum yang bisa Anda ketik di editor.
+```
+http://192.168.4.1
+```
+atau
+```
+http://wifi.duck
+```
 
-| Perintah | Contoh Penggunaan | Penjelasan |
-|---|---|---|
+### 3️⃣ Mengelola Script
+
+| Aksi | Cara |
+|:---|:---|
+| ➕ **Membuat** | Ketik nama file baru di kolom yang tersedia lalu klik **Create**. |
+| ✏️ **Mengedit** | Klik salah satu *script* yang sudah ada untuk memuat isinya ke dalam editor. |
+| ▶️ **Menjalankan** | Tekan tombol **Run** untuk mengeksekusi *script* pada komputer target. |
+| 🗑️ **Menghapus** | Gunakan tombol **Delete** untuk membuang *script* yang tidak diperlukan. |
+
+### 4️⃣ Akses Terminal
+Buka halaman **Terminal** melalui menu navigasi untuk masuk ke mode *command line* secara langsung — memformat SPIFFS, mengecek variabel sistem, atau menjalankan perintah *ducky* baris demi baris.
+
+---
+
+## 📖 Referensi Ducky Script
+
+Berikut adalah panduan cepat untuk perintah yang bisa Anda ketik di editor.
+
+| Perintah | Contoh | Penjelasan |
+|:---|:---|:---|
 | `STRING` | `STRING Halo Dunia` | Mengetikkan teks persis seperti yang tertulis. |
-| `ENTER` | `ENTER` | Mensimulasikan penekanan tombol Enter/Return. |
-| `DELAY` | `DELAY 1000` | Menjeda eksekusi selama waktu yang ditentukan dalam milidetik (contoh: 1000 = 1 detik). |
-| `GUI` / `WINDOWS` | `GUI r` | Menekan tombol Windows bersamaan dengan tombol lain (contoh: membuka dialog Run). |
-| `ALT` / `CTRL` / `SHIFT` | `CTRL c` | Digunakan untuk menjalankan kombinasi *shortcut* keyboard. |
-| `JITTER` | `JITTER ON` / `JITTER OFF` | Mengaktifkan/menonaktifkan mode pengetikan siluman (jeda acak 15-45ms per huruf) agar lolos deteksi *Antivirus/Heuristics*. |
+| `ENTER` | `ENTER` | Mensimulasikan penekanan tombol Enter. |
+| `DELAY` | `DELAY 1000` | Menjeda eksekusi (dalam milidetik). |
+| `GUI` / `WINDOWS` | `GUI r` | Menekan tombol Windows + tombol lain. |
+| `ALT` / `CTRL` / `SHIFT` | `CTRL c` | Kombinasi *shortcut* keyboard. |
+| `JITTER` | `JITTER ON` / `JITTER OFF` | Mode pengetikan siluman (jeda acak 15-45ms per huruf). |
+| `REPEAT` | `REPEAT 3` | Mengulangi perintah terakhir sebanyak N kali. |
+| `REM` | `REM ini komentar` | Komentar (tidak dieksekusi). |
+| `LED` | `LED 255 0 0` | Mengatur warna Neopixel LED (R G B). |
 
-## Catatan Keamanan
+### 💡 Contoh Script
 
-Antarmuka ini dilengkapi dengan fitur perlindungan pemulihan otomatis (*self-healing*) untuk mencegah perubahan yang tidak disengaja maupun modifikasi nakal pada hak cipta *footer* melalui *developer tools* di *browser*. Pastikan Anda membiarkan *script* tersebut utuh agar aplikasi dapat berjalan dengan lancar.
+```
+REM === Contoh: Buka Notepad dan ketik pesan ===
+DEFAULTDELAY 200
+GUI r
+DELAY 500
+STRING notepad
+ENTER
+DELAY 1000
+JITTER ON
+STRING Halo! Ini dikirim oleh WiFi Duck 🦆
+JITTER OFF
+```
 
-## Kredit
+---
 
-Dikembangkan dan didesain ulang oleh [denoyey](https://github.com/denoyey).
+## 🔒 Catatan Keamanan
+
+Antarmuka ini dilengkapi dengan fitur perlindungan pemulihan otomatis (*self-healing*) untuk mencegah perubahan yang tidak disengaja maupun modifikasi nakal pada hak cipta *footer* melalui *developer tools* di *browser*.
+
+---
+
+## 👨‍💻 Kredit
+
+<p align="center">
+  Dikembangkan dan didesain ulang oleh <a href="https://github.com/denoyey"><strong>denoyey</strong></a> 🦆
+</p>
