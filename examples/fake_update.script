@@ -3,5 +3,7 @@ REM Membuka layar update palsu yang tidak bisa di-close
 DELAY 1000
 GUI r
 DELAY 500
+JITTER ON
 STRING msedge --kiosk "https://fakeupdate.net/win10ue/"
+JITTER OFF
 ENTER

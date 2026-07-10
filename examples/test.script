@@ -15,7 +15,9 @@ STRING notepad
 ENTER
 
 REM hello world
+JITTER ON
 STRING Hello World!
+JITTER OFF
 ENTER
 
 REM delay test

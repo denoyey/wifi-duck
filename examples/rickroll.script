@@ -3,5 +3,7 @@ REM Opens the default browser and plays Rick Astley
 DELAY 1000
 GUI r
 DELAY 300
+JITTER ON
 STRING https://youtu.be/GBIIQ0kP15E?si=cklv6DbDlntxYSnd
+JITTER OFF
 ENTER

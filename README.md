@@ -60,6 +60,7 @@ Berikut adalah panduan cepat untuk beberapa perintah umum yang bisa Anda ketik d
 | `DELAY` | `DELAY 1000` | Menjeda eksekusi selama waktu yang ditentukan dalam milidetik (contoh: 1000 = 1 detik). |
 | `GUI` / `WINDOWS` | `GUI r` | Menekan tombol Windows bersamaan dengan tombol lain (contoh: membuka dialog Run). |
 | `ALT` / `CTRL` / `SHIFT` | `CTRL c` | Digunakan untuk menjalankan kombinasi *shortcut* keyboard. |
+| `JITTER` | `JITTER ON` / `JITTER OFF` | Mengaktifkan/menonaktifkan mode pengetikan siluman (jeda acak 15-45ms per huruf) agar lolos deteksi *Antivirus/Heuristics*. |
 
 ## Catatan Keamanan
 
