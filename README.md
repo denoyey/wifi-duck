@@ -24,11 +24,20 @@ Antarmuka ini menyediakan fitur lengkap untuk mengendalikan perangkat WiFi Duck 
 | **Custom Modals** | Dialog *popup* khusus yang super cepat, ringan, elegan, dan tidak memblokir pergerakan *browser*. |
 | **Settings Management** | Ubah nama WiFi (SSID), *password*, dan saluran (Channel) langsung dari *browser* tanpa perlu melakukan *flash* ulang alatnya. |
 
+## Hardware yang Digunakan
+
+Proyek ini menggunakan dua modul mikrokontroler yang saling terhubung:
+
+| Wemos D1 Mini | Arduino Pro Micro |
+|:---:|:---:|
+| ![Wemos D1 Mini](web/assets/img/alat/Wemos-D1-Mini.webp) | ![Arduino Pro Micro](web/assets/img/alat/Arduino-Pro-Micro.webp) |
+| Menangani WiFi & Web Server | Menangani USB Keyboard (HID) |
+
 ## Analisis & Ringkasan Proyek
 
 Berdasarkan arsitektur internal repositori ini, WiFi Duck bekerja menggunakan sistem dua mikrokontroler (*dual-MCU*):
-1. **ESP8266** (berada di *folder* `esp_duck`): Bertugas menangani server web, memancarkan sinyal WiFi (Access Point), dan menyimpan file *script* (SPIFFS).
-2. **ATmega32u4** (berada di *folder* `atmega_duck`): Berperan sebagai *keyboard* USB (HID) yang bertugas mengeksekusi *script/payload* yang dikirimkan oleh ESP8266 melalui komunikasi serial/I2C.
+1. **Wemos D1 Mini (ESP8266)** (berada di *folder* `esp_duck`): Bertugas menangani server web, memancarkan sinyal WiFi (Access Point), dan menyimpan file *script* (SPIFFS).
+2. **Arduino Pro Micro (ATmega32u4)** (berada di *folder* `atmega_duck`): Berperan sebagai *keyboard* USB (HID) yang bertugas mengeksekusi *script/payload* yang dikirimkan oleh Wemos D1 Mini melalui komunikasi serial/I2C.
 
 Proyek ini sekarang berada di **Versi 1.2.0** dan secara bawaan menggunakan alamat `wifi.duck` agar mudah diakses di *browser*.
 
