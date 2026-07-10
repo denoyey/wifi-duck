@@ -1,3 +1,93 @@
+class DuckyHighlighter {
+  constructor(editorElement, overlayElement, gutterElement) {
+    this.editor = editorElement;
+    this.overlay = overlayElement;
+    this.gutter = gutterElement;
+
+    this.init();
+  }
+
+  init() {
+    this.editor.addEventListener('input', () => this.update());
+    this.editor.addEventListener('scroll', () => this.syncScroll());
+    // Initial highlight will be triggered manually when file is loaded
+  }
+
+  syncScroll() {
+    this.overlay.scrollTop = this.editor.scrollTop;
+    this.overlay.scrollLeft = this.editor.scrollLeft;
+    if (this.gutter) {
+        this.gutter.scrollTop = this.editor.scrollTop;
+    }
+  }
+
+  update() {
+    let text = this.editor.value;
+    
+    // Update line numbers
+    if (this.gutter) {
+        let linesCount = text.split('\n').length;
+        if (linesCount === 0) linesCount = 1;
+        let numbersHtml = '';
+        for (let i = 1; i <= linesCount; i++) {
+            numbersHtml += i + '<br>';
+        }
+        this.gutter.innerHTML = numbersHtml;
+    }
+    
+    // Handle the quirk where trailing newline is ignored by HTML in pre/div
+    if (text[text.length - 1] === '\n') {
+      text += ' ';
+    }
+    
+    this.overlay.innerHTML = this.highlight(text);
+  }
+
+  highlight(text) {
+    // Escape HTML to prevent injection and rendering issues
+    text = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    
+    const keywords = ["STRING", "DELAY", "DEFAULTDELAY", "DEFAULT_DELAY", "ENTER", "GUI", "WINDOWS", "ALT", "CTRL", "SHIFT", "REPEAT", "REPLAY", "LOCALE", "KEYCODE", "JITTER"];
+    
+    let lines = text.split('\n');
+    let highlightedLines = lines.map(line => {
+      let trimmed = line.trimStart();
+      if (trimmed.startsWith("REM")) {
+        return `<span class="hl-comment">${line}</span>`;
+      }
+      
+      let matchedKeyword = keywords.find(k => trimmed.startsWith(k));
+      if (matchedKeyword) {
+        // Find exact boundary of keyword to preserve original spacing
+        let cmdRegex = new RegExp(`^(\\s*)(${matchedKeyword})(\\s+|$)`, 'i');
+        let match = line.match(cmdRegex);
+        
+        if (match) {
+          let prefixSpace = match[1];
+          let cmd = match[2];
+          let suffixSpace = match[3];
+          let rest = line.substring(match[0].length);
+          
+          if (["STRING"].includes(cmd.toUpperCase())) {
+              rest = `<span class="hl-string">${rest}</span>`;
+          } else if (["DELAY", "DEFAULTDELAY", "DEFAULT_DELAY", "REPEAT", "REPLAY"].includes(cmd.toUpperCase())) {
+              rest = `<span class="hl-value">${rest}</span>`;
+          } else if (["GUI", "WINDOWS", "ALT", "CTRL", "SHIFT"].includes(cmd.toUpperCase())) {
+              rest = `<span class="hl-modifier">${rest}</span>`;
+          } else if (cmd.toUpperCase() === "JITTER") {
+              rest = `<span class="hl-value">${rest}</span>`;
+          }
+          
+          return `${prefixSpace}<span class="hl-keyword">${cmd}</span>${suffixSpace}${rest}`;
+        }
+      }
+      return line;
+    });
+    
+    return highlightedLines.join('\n');
+  }
+}
+
 class ScriptManager {
   constructor() {
     this.socket = new WiFiDuckSocket(this.onConnected.bind(this));
@@ -50,6 +140,7 @@ class ScriptManager {
 
   append(str) {
     UIHelper.E("editor").value += str;
+    if (this.highlighter) this.highlighter.update();
   }
 
   updateFileList() {
@@ -198,6 +289,7 @@ class ScriptManager {
         this.readStream();
         this.socket.status("reading...");
       } else {
+        if (this.highlighter) this.highlighter.update();
         this.socket.send("close", this.socket.logWs.bind(this.socket));
         this.socket.updateStatus();
       }
@@ -278,6 +370,8 @@ class ScriptManager {
   }
 
   init() {
+    this.highlighter = new DuckyHighlighter(UIHelper.E("editor"), UIHelper.E("editor-overlay"), UIHelper.E("editor-gutter"));
+
     UIHelper.E("reconnect").onclick = () => this.socket.init();
     UIHelper.E("scriptsReload").onclick = () => this.updateFileList();
     UIHelper.E("format").onclick = () => this.formatSpiffs();

@@ -936,20 +936,83 @@ tbody tr:hover {
 }
 
 /* Inputs and buttons */
-textarea {
-  color: var(--text-main);
-  resize: vertical;
+/* Syntax Highlighting Container */
+.vscode-editor-container {
+  position: relative;
   width: 100%;
   height: 400px;
-  padding: 16px;
+  background: var(--bg-color);
   border: 1px solid var(--border-color);
   border-radius: 6px;
-  background: var(--bg-color);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  box-sizing: border-box;
-  transition: border-color 0.2s;
+  overflow: hidden;
   box-shadow: inset 0 1px 2px 0 rgba(0,0,0,0.05);
+  transition: border-color 0.2s;
+  display: flex;
 }
+
+.vscode-editor-container:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.vscode-gutter {
+  width: 40px;
+  background: var(--panel-bg);
+  border-right: 1px solid var(--border-color);
+  color: var(--text-muted);
+  text-align: right;
+  padding: 16px 8px 16px 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  user-select: none;
+  overflow: hidden;
+  z-index: 3;
+}
+
+.editor-wrapper {
+  position: relative;
+  flex-grow: 1;
+  height: 100%;
+}
+
+textarea#editor, .syntax-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  padding: 16px;
+  margin: 0;
+  border: none;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  box-sizing: border-box;
+  background: transparent;
+}
+
+textarea#editor {
+  color: transparent;
+  caret-color: var(--text-main);
+  z-index: 2;
+  resize: none;
+  outline: none;
+}
+
+.syntax-overlay {
+  color: var(--text-main);
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Syntax Colors (Dracula Theme inspired) */
+.hl-keyword { color: #ff79c6; font-weight: 600; }
+.hl-string { color: #f1fa8c; }
+.hl-comment { color: #6272a4; font-style: italic; }
+.hl-value { color: #bd93f9; }
+.hl-modifier { color: #8be9fd; font-weight: 600; }
 
 textarea:focus, input[type="text"]:focus {
   outline: none;

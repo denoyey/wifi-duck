@@ -57,8 +57,11 @@
                         </div>
                     </div>
                     <div class="vscode-editor-container">
-                        <div class="vscode-gutter"></div>
-                        <textarea id="editor" spellcheck="false"></textarea>
+                        <div class="vscode-gutter" id="editor-gutter"></div>
+                        <div class="editor-wrapper">
+                            <div class="syntax-overlay" id="editor-overlay" aria-hidden="true"></div>
+                            <textarea id="editor" spellcheck="false"></textarea>
+                        </div>
                     </div>
                     <div class="vscode-statusbar">
                         <div class="statusbar-left">
