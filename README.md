@@ -1,70 +1,70 @@
-# WiFi Duck Web Interface
+# Antarmuka Web WiFi Duck
 
-A modern, responsive web interface for the WiFi Duck project, designed to allow easy management and execution of Ducky Script payloads directly from your browser.
+Antarmuka web modern dan responsif untuk proyek WiFi Duck, dirancang agar Anda dapat mengelola dan menjalankan *script payload* (Ducky Script) dengan mudah langsung dari *browser* Anda.
 
-## Previews
+## Pratinjau
 
-### Desktop View
+### Tampilan Desktop
 ![Desktop Preview](web/assets/img/preview/desktop-1.png)
 
-### Mobile View
+### Tampilan Mobile
 ![Mobile Preview](web/assets/img/preview/mobile-1.png)
 
-## Core Features
+## Fitur Utama
 
-This interface provides a complete set of tools to interact with your WiFi Duck hardware. 
+Antarmuka ini menyediakan fitur lengkap untuk mengendalikan perangkat WiFi Duck Anda.
 
-| Feature | Description |
+| Fitur | Deskripsi |
 |---|---|
-| **Script Editor** | A built-in code editor that allows you to create, edit, and save Ducky Scripts directly on the device storage. |
-| **Live Terminal** | A hacker-styled interactive terminal to execute commands in real-time, view output logs, and monitor device status. |
-| **Responsive UI** | The interface is fully responsive, ensuring a clean and usable layout on both large desktop screens and small mobile devices. |
-| **Theme Toggle** | A built-in toggle to switch between Light and Dark mode depending on your viewing preference. |
-| **Live Status** | Real-time connection indicators and memory storage monitoring directly on the dashboard. |
-| **Custom Modals** | Fast and non-blocking custom dialog popups for alerts, confirmations, and prompts. |
-| **Settings Management** | Easily change your WiFi SSID, password, and channel directly from the browser without flashing the device. |
+| **Script Editor** | Editor kode bawaan untuk membuat, mengedit, dan menyimpan Ducky Script langsung ke dalam memori perangkat. |
+| **Live Terminal** | Terminal interaktif bergaya *hacker* untuk menjalankan perintah secara langsung, melihat log keluaran, dan memantau status alat. |
+| **Responsive UI** | Tampilan antarmuka yang sangat fleksibel, memastikan tata letak tetap rapi dan nyaman digunakan baik di layar komputer maupun HP. |
+| **Theme Toggle** | Tombol praktis untuk berganti antara mode Terang (Light) dan Gelap (Dark) sesuai selera mata Anda. |
+| **Live Status** | Indikator koneksi *real-time* dan pemantau sisa memori penyimpanan langsung dari halaman utama. |
+| **Custom Modals** | Dialog *popup* khusus yang super cepat, ringan, elegan, dan tidak memblokir pergerakan *browser*. |
+| **Settings Management** | Ubah nama WiFi (SSID), *password*, dan saluran (Channel) langsung dari *browser* tanpa perlu melakukan *flash* ulang alatnya. |
 
-## Project Overview & Analysis
+## Analisis & Ringkasan Proyek
 
-Based on the internal architecture of this repository, the WiFi Duck relies on a dual-microcontroller setup:
-1. **ESP8266** (in the `esp_duck` directory): Handles the web server, Wi-Fi access point, and payload storage (SPIFFS).
-2. **ATmega32u4** (in the `atmega_duck` directory): Acts as the USB HID (Human Interface Device) keyboard to execute the payloads sent by the ESP8266 via serial/I2C communication.
+Berdasarkan arsitektur internal repositori ini, WiFi Duck bekerja menggunakan sistem dua mikrokontroler (*dual-MCU*):
+1. **ESP8266** (berada di *folder* `esp_duck`): Bertugas menangani server web, memancarkan sinyal WiFi (Access Point), dan menyimpan file *script* (SPIFFS).
+2. **ATmega32u4** (berada di *folder* `atmega_duck`): Berperan sebagai *keyboard* USB (HID) yang bertugas mengeksekusi *script/payload* yang dikirimkan oleh ESP8266 melalui komunikasi serial/I2C.
 
-The project currently sits at **Version 1.2.0** and uses `wifi.duck` as its local hostname resolution for easy access.
+Proyek ini sekarang berada di **Versi 1.2.0** dan secara bawaan menggunakan alamat `wifi.duck` agar mudah diakses di *browser*.
 
-## Quick Start Guide
+## Panduan Cepat
 
-### 1. Connecting to the Device
-Power on your WiFi Duck. It will host its own WiFi network. Connect your computer or phone to this network. By default, the network is usually named `wifiduck` with the password `wifiduck`.
+### 1. Menghubungkan ke Perangkat
+Nyalakan WiFi Duck Anda. Alat ini akan memancarkan sinyal WiFi-nya sendiri. Hubungkan komputer atau HP Anda ke jaringan WiFi tersebut. Secara bawaan (default), nama WiFi-nya adalah `wifiduck` dengan kata sandi `wifiduck`.
 
-### 2. Accessing the Interface
-Open your preferred web browser and navigate to `http://192.168.4.1`. You will be greeted by the home dashboard where you can see your current scripts and device memory.
+### 2. Mengakses Antarmuka (Web UI)
+Buka *browser* web favorit Anda lalu ketikkan alamat `http://192.168.4.1` atau `wifi.duck`. Anda akan disambut oleh halaman *dashboard* utama tempat Anda bisa melihat memori perangkat dan daftar *script*.
 
-### 3. Managing Scripts
-- **Create**: Type a new filename in the input box and click Create.
-- **Edit**: Click on any existing script to load its contents into the text editor.
-- **Run**: Press the Run button to immediately execute the payload on the target machine.
-- **Delete**: Use the Delete button to remove scripts you no longer need.
+### 3. Mengelola Script
+- **Membuat**: Ketik nama file baru di kolom yang tersedia lalu klik **Create**.
+- **Mengedit**: Klik salah satu *script* yang sudah ada untuk memuat isinya ke dalam teks editor.
+- **Menjalankan**: Tekan tombol **Run** untuk langsung mengeksekusi *script* tersebut pada komputer korban.
+- **Menghapus**: Gunakan tombol **Delete** untuk membuang *script* yang tidak diperlukan lagi.
 
-### 4. Terminal Access
-Navigate to the Terminal page from the top navigation bar to access the live command line. This allows you to interact with the device beyond simple script execution, enabling you to format storage, check system variables, or run raw ducky commands line-by-line.
+### 4. Akses Terminal
+Buka halaman **Terminal** melalui menu navigasi di atas untuk masuk ke mode *command line* secara langsung. Ini memungkinkan Anda untuk berinteraksi dengan alat lebih jauh, seperti memformat penyimpanan (SPIFFS), mengecek variabel sistem, atau menjalankan perintah *ducky* baris demi baris secara manual.
 
-## Ducky Script Reference
+## Referensi Ducky Script
 
-Below is a quick reference for common commands you can use in the editor.
+Berikut adalah panduan cepat untuk beberapa perintah umum yang bisa Anda ketik di editor.
 
-| Command | Usage Example | Explanation |
+| Perintah | Contoh Penggunaan | Penjelasan |
 |---|---|---|
-| `STRING` | `STRING Hello World` | Types the specified text exactly as written. |
-| `ENTER` | `ENTER` | Simulates pressing the Enter/Return key. |
-| `DELAY` | `DELAY 1000` | Pauses execution for a set time in milliseconds (e.g., 1000 = 1 second). |
-| `GUI` / `WINDOWS` | `GUI r` | Presses the Windows key along with another key (e.g., to open the Run dialog). |
-| `ALT` / `CTRL` / `SHIFT` | `CTRL c` | Used to trigger keyboard shortcuts. |
+| `STRING` | `STRING Halo Dunia` | Mengetikkan teks persis seperti yang tertulis. |
+| `ENTER` | `ENTER` | Mensimulasikan penekanan tombol Enter/Return. |
+| `DELAY` | `DELAY 1000` | Menjeda eksekusi selama waktu yang ditentukan dalam milidetik (contoh: 1000 = 1 detik). |
+| `GUI` / `WINDOWS` | `GUI r` | Menekan tombol Windows bersamaan dengan tombol lain (contoh: membuka dialog Run). |
+| `ALT` / `CTRL` / `SHIFT` | `CTRL c` | Digunakan untuk menjalankan kombinasi *shortcut* keyboard. |
 
-## Security Note
+## Catatan Keamanan
 
-This interface includes self-healing protective measures to prevent accidental or malicious tampering of the footer copyright via browser developer tools. Make sure you leave these scripts intact to ensure the application runs smoothly.
+Antarmuka ini dilengkapi dengan fitur perlindungan pemulihan otomatis (*self-healing*) untuk mencegah perubahan yang tidak disengaja maupun modifikasi nakal pada hak cipta *footer* melalui *developer tools* di *browser*. Pastikan Anda membiarkan *script* tersebut utuh agar aplikasi dapat berjalan dengan lancar.
 
-## Credits
+## Kredit
 
-Developed and redesigned by [denoyey](https://github.com/denoyey).
+Dikembangkan dan didesain ulang oleh [denoyey](https://github.com/denoyey).
