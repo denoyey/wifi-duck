@@ -1181,3 +1181,46 @@ button.white:hover { background: var(--white-btn-hover); }
 .modal-buttons button.white:hover {
   background: var(--white-btn-hover);
 }
+
+/* --- Folder Visuals for Script List --- */
+.folder-header {
+  cursor: pointer;
+  background-color: var(--card-bg);
+  transition: background-color 0.2s ease;
+}
+
+.folder-header:hover {
+  background-color: var(--white-btn-hover);
+}
+
+.folder-header td {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.folder-icon {
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.folder-header strong {
+  font-size: 1.05rem;
+  color: var(--text-main);
+  text-transform: capitalize;
+}
+
+.folder-file-row td.indented {
+  padding-left: 40px;
+  position: relative;
+}
+
+.folder-file-row td.indented::before {
+  content: "↳";
+  position: absolute;
+  left: 20px;
+  color: var(--text-muted);
+  opacity: 0.5;
+}

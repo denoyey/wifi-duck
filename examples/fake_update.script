@@ -1,0 +1,7 @@
+REM --- Fake Windows Update ---
+REM Membuka layar update palsu yang tidak bisa di-close
+DELAY 1000
+GUI r
+DELAY 500
+STRING msedge --kiosk "https://fakeupdate.net/win10ue/"
+ENTER

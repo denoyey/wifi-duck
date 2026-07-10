@@ -77,7 +77,10 @@ class ScriptManager {
       this.socket.send("ls", (csv) => {
         this.fileList += csv;
         const lsLines = this.fileList.split(/\n/);
-        let tableHTML = "<thead>\n<tr>\n<th>File</th>\n<th>Byte</th>\n<th>Actions</th>\n</tr>\n</thead>\n<tbody>\n";
+        
+        const folders = {};
+        const rootFiles = [];
+        let firstFile = null;
 
         for (let i = 0; i < lsLines.length; i++) {
           const data = lsLines[i].split(" ");
@@ -85,24 +88,87 @@ class ScriptManager {
           const fileSize = data[1];
 
           if (fileName.length > 0) {
-            if (i === 0 && !this.fileOpened) {
-              this.readFile(fileName);
+            if (!firstFile) firstFile = fileName;
+            
+            let folderName = "";
+            let displayName = fileName;
+            let cleanPath = fileName.startsWith("/") ? fileName.substring(1) : fileName;
+            let parts = cleanPath.split("/");
+            if (parts.length > 1) {
+              folderName = parts[0];
+              displayName = parts.slice(1).join("/");
             }
-            tableHTML += "<tr>\n";
-            tableHTML += "<td>" + fileName + "</td>\n";
-            tableHTML += "<td>" + fileSize + "</td>\n";
-            tableHTML += "<td>\n";
-            tableHTML += "<button class=\"primary\" onclick=\"app.readFile('" + fileName + "')\">edit</button>\n";
-            tableHTML += "<button class=\"warn\" onclick=\"app.runFile('" + fileName + "')\">run</button>\n";
-            tableHTML += "</tr>\n";
+            
+            if (folderName === "") {
+                rootFiles.push({ fileName, displayName, fileSize });
+            } else {
+                if (!folders[folderName]) folders[folderName] = [];
+                folders[folderName].push({ fileName, displayName, fileSize });
+            }
           }
         }
+        
+        if (firstFile && !this.fileOpened) {
+          this.readFile(firstFile);
+        }
+
+        let tableHTML = "<thead>\n<tr>\n<th>File</th>\n<th>Byte</th>\n<th>Actions</th>\n</tr>\n</thead>\n<tbody>\n";
+
+        for (const [folder, files] of Object.entries(folders)) {
+          const folderId = "folder-" + folder.replace(/[^a-zA-Z0-9]/g, "-");
+          tableHTML += `<tr class="folder-header" onclick="app.toggleFolder('${folderId}', this)">`;
+          tableHTML += `<td colspan="3"><span class="folder-icon">▼</span> <strong>${folder}</strong></td>`;
+          tableHTML += `</tr>\n`;
+          
+          for (let i = 0; i < files.length; i++) {
+            const f = files[i];
+            tableHTML += `<tr class="folder-file-row ${folderId}">\n`;
+            tableHTML += `<td class="indented">${f.displayName}</td>\n`;
+            tableHTML += `<td>${f.fileSize}</td>\n`;
+            tableHTML += `<td>\n`;
+            tableHTML += `<button class="primary" onclick="app.readFile('${f.fileName}')">edit</button>\n`;
+            tableHTML += `<button class="warn" onclick="app.runFile('${f.fileName}')">run</button>\n`;
+            tableHTML += `</td>\n`;
+            tableHTML += `</tr>\n`;
+          }
+        }
+
+        for (let i = 0; i < rootFiles.length; i++) {
+            const f = rootFiles[i];
+            tableHTML += `<tr>\n`;
+            tableHTML += `<td>${f.displayName}</td>\n`;
+            tableHTML += `<td>${f.fileSize}</td>\n`;
+            tableHTML += `<td>\n`;
+            tableHTML += `<button class="primary" onclick="app.readFile('${f.fileName}')">edit</button>\n`;
+            tableHTML += `<button class="warn" onclick="app.runFile('${f.fileName}')">run</button>\n`;
+            tableHTML += `</td>\n`;
+            tableHTML += `</tr>\n`;
+        }
+
         tableHTML += "</tbody>\n";
 
         const scriptTable = UIHelper.E("scriptTable");
         if (scriptTable) scriptTable.innerHTML = tableHTML;
       });
     });
+  }
+
+  toggleFolder(folderClass, headerRow) {
+    const rows = document.querySelectorAll("." + folderClass);
+    let isHidden = false;
+    rows.forEach(row => {
+      if (row.style.display === "none") {
+        row.style.display = "table-row";
+        isHidden = false;
+      } else {
+        row.style.display = "none";
+        isHidden = true;
+      }
+    });
+    const icon = headerRow.querySelector(".folder-icon");
+    if (icon) {
+      icon.innerHTML = isHidden ? "▶" : "▼";
+    }
   }
 
   async formatSpiffs() {
