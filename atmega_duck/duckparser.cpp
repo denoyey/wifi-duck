@@ -226,6 +226,16 @@ namespace duckparser {
                 sleep(toInt(line_str, line_str_len));
                 ignore_delay = true;
             }
+            
+            // JITTER (-> enable/disable stealth typing jitter)
+            else if (compare(cmd->str, cmd->len, "JITTER", CASE_SENSETIVE)) {
+                if (compare(line_str, line_str_len, "ON", CASE_INSENSETIVE)) {
+                    keyboard::enableJitter();
+                } else if (compare(line_str, line_str_len, "OFF", CASE_INSENSETIVE)) {
+                    keyboard::disableJitter();
+                }
+                ignore_delay = true;
+            }
 
             // DEFAULTDELAY/DEFAULT_DELAY (set default delay per command)
             else if (compare(cmd->str, cmd->len, "DEFAULTDELAY", CASE_SENSETIVE) || compare(cmd->str, cmd->len, "DEFAULT_DELAY", CASE_SENSETIVE)) {

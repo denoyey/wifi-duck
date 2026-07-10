@@ -5,6 +5,7 @@ namespace keyboard {
     // ====== PRIVATE ====== //
     hid_locale_t* locale      { &locale_us };
     report prev_report = report { KEY_NONE, KEY_NONE, { KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE, KEY_NONE } };
+    bool jitterEnabled = false;
 
     const uint8_t keyboardDescriptor[] PROGMEM {
         //  Keyboard
@@ -62,6 +63,15 @@ namespace keyboard {
         static HIDSubDescriptor node(keyboardDescriptor, sizeof(keyboardDescriptor));
 
         HID().AppendDescriptor(&node);
+        randomSeed(analogRead(0));
+    }
+
+    void enableJitter() {
+        jitterEnabled = true;
+    }
+
+    void disableJitter() {
+        jitterEnabled = false;
     }
 
     void setLocale(hid_locale_t* locale) {
@@ -203,6 +213,9 @@ namespace keyboard {
     void write(const char* str, size_t len) {
         for (size_t i = 0; i<len; ++i) {
             i += write(&str[i]);
+            if (jitterEnabled) {
+                delay(random(15, 45)); // Add random jitter delay
+            }
         }
     }
 }

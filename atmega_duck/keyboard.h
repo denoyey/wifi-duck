@@ -16,6 +16,9 @@ namespace keyboard {
 
     void setLocale(hid_locale_t* locale);
 
+    void enableJitter();
+    void disableJitter();
+
     void send(report* k);
     void release();
 
