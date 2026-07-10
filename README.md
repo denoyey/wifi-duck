@@ -46,6 +46,22 @@ Berikut adalah foto implementasi nyata WiFi Duck pada *breadboard*. Kedua modul 
 | **Neopixel LED** (tengah) | Status LED — menampilkan warna berbeda sesuai kondisi alat (siap/menjalankan *script*/error). |
 | **Breadboard** | Media perangkaian tanpa solder untuk menghubungkan seluruh komponen. |
 
+## Cara Kerja WiFi Duck
+
+WiFi Duck bekerja dengan prinsip ***Keystroke Injection Attack*** — alat ini menyamar sebagai *keyboard* USB biasa di mata komputer target. Begitu dicolokkan, alat akan secara otomatis mengetikkan perintah-perintah berbahaya dengan kecepatan super tinggi, persis seperti ada orang tak terlihat yang sedang mengetik di komputer Anda.
+
+<p align="center">
+  <img src="web/assets/img/alat/Cara-Kerja-WifiDuck.jpg" alt="Cara Kerja WiFi Duck — Keystroke Injection Attack" width="700">
+</p>
+
+| Tahap | Proses |
+|:---:|---|
+| **1️⃣ USB Drive** | WiFi Duck dicolokkan ke port USB komputer target. Sistem operasi mengenalinya sebagai *keyboard* biasa. |
+| **2️⃣ Connection** | Alat mengirimkan rangkaian penekanan tombol otomatis, misalnya: `Win+R` → ketik `CMD` → `Enter` → ketik `SHUTDOWN`. |
+| **3️⃣ Computer** | Komputer target mengeksekusi semua perintah tersebut tanpa curiga, karena sumbernya dianggap berasal dari *keyboard* fisik yang sah. |
+
+> 💡 **Yang membuat WiFi Duck istimewa:** Anda bisa mengontrol dan memodifikasi *script* serangan secara nirkabel (*wireless*) melalui antarmuka web dari HP Anda — tanpa perlu menyentuh komputer target lagi setelah alat dicolokkan!
+
 ## Analisis & Ringkasan Proyek
 
 Berdasarkan arsitektur internal repositori ini, WiFi Duck bekerja menggunakan sistem dua mikrokontroler (*dual-MCU*):
